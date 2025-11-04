@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Settings — Aqarino</title><link rel="stylesheet" href="/static/style.css"></head>
+<body>
+  <header class="topbar"><div class="brand">Aqarino</div><nav><a href="/">Dashboard</a></nav></header>
+  <main class="container">
+    <h1>Settings</h1>
+    <form id="cfgform">
+      <label>Lead output:
+        <select name="lead_output"><option value="excel">Excel (default)</option><option value="email">Email</option><option value="webhook">Webhook</option></select>
+      </label>
+      <label>Webhook URL: <input name="webhook_url" type="url" placeholder="https://example.com/webhook"></label>
+      <label>Email to receive leads: <input name="lead_email" type="email"></label>
+      <button type="submit">Save</button>
+    </form>
+    <div id="msg"></div>
+  </main>
+<script>
+async function loadCfg(){
+  const res = await fetch('/api/admin/config');
+  const cfg = await res.json();
+  document.querySelector('[name=lead_output]').value = cfg.get('lead_output','excel');
+  document.querySelector('[name=webhook_url]').value = cfg.get('webhook_url','');
+  document.querySelector('[name=lead_email]').value = cfg.get('lead_email','');
+}
+document.getElementById('cfgform').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const body = { lead_output: fd.get('lead_output'), webhook_url: fd.get('webhook_url'), lead_email: fd.get('lead_email') };
+  const res = await fetch('/api/admin/config',{method:'POST',headers:{'Content-Type':'application/json'},body: JSON.stringify(body)});
+  const j = await res.json();
+  document.getElementById('msg').innerText = 'Saved';
+});
+loadCfg();
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Aqarino — Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar"><div class="brand">Aqarino</div><nav><a href="/settings">Settings</a> <a href="/static/host/index.html" target="_blank">Open Demo</a></nav></header>
+  <main class="container"><h1>Leads</h1><div id="leads"></div></main>
+  <script>
+  async function loadLeads(){
+    try{
+      const res = await fetch('/api/leads');
+      const data = await res.json();
+      const el = document.getElementById('leads');
+      if(!data.length) el.innerHTML = '<p>No leads yet. Open the demo and send a message.</p>'; else {
+        el.innerHTML = '<table class="leads-table"><thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Email</th><th>Message</th><th>Date</th></tr></thead><tbody>' + data.map(l=>`<tr><td>${l.id}</td><td>${l.visitor.name||''}</td><td>${l.visitor.phone||''}</td><td>${l.visitor.email||''}</td><td>${l.message||l.intent||''}</td><td>${l.created_at}</td></tr>`).join('') + '</tbody></table>';
+      }
+    }catch(e){ console.error(e); document.getElementById('leads').innerText='Error loading leads'; }
+  }
+  loadLeads();
+  </script>
+</body>
+</html>

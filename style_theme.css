@@ -1,0 +1,21 @@
+
+:root{
+  --aq-primary: #0077B6;
+  --aq-accent: #EAD7B7;
+  --aq-bg: #F9F9F9;
+  --aq-text: #2E2E2E;
+  --aq-shadow: 0 8px 24px rgba(2,62,138,0.12);
+  --aq-radius: 12px;
+  font-family: Inter, system-ui, -apple-system, "Poppins", "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+.aq-widget { position: fixed; right: 18px; bottom: 18px; z-index: 99999; }
+.aq-button { width:64px;height:64px;border-radius:50%;background:var(--aq-primary);display:flex;align-items:center;justify-content:center;color:white;box-shadow:var(--aq-shadow);cursor:pointer;border:none; }
+.aq-window { width:360px; max-width:90vw; border-radius:var(--aq-radius); background:var(--aq-bg); box-shadow:var(--aq-shadow); overflow:hidden; }
+.aq-header { background: linear-gradient(90deg, var(--aq-primary), #023E8A); color: white; padding:12px; display:flex; align-items:center; gap:10px; }
+.aq-header img.logo{ width:36px; height:36px; border-radius:6px; object-fit:cover; }
+.aq-messages { padding:12px; max-height:360px; overflow:auto; background: #fff; }
+.aq-msg { padding:10px 12px; margin-bottom:8px; border-radius:8px; background:#f1f5f9; color:var(--aq-text); }
+.aq-msg.agent { background: linear-gradient(180deg, #f9fbfd, #f1f5f9); }
+.aq-footer { padding:10px; display:flex; gap:8px; }
+.aq-input { flex:1; padding:10px;border-radius:8px;border:1px solid #e6eef6; }
+.aq-send { background:var(--aq-primary); color:white; border:none; padding:10px 12px; border-radius:8px; cursor:pointer; }

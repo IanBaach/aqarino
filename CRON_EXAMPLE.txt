@@ -1,0 +1,3 @@
+
+# Cron: send export daily at 08:00 using send_pending_export.py
+0 8 * * * /usr/bin/python3 /opt/aqarino/tools/send_pending_export.py >> /var/log/aqarino_export.log 2>&1
