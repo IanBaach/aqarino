@@ -1,18 +1,10 @@
-version: '3.9'
+version: '3.8'
 services:
-  aqarino-backend:
-    build: ./backend
-    container_name: aqarino-backend
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_URL=sqlite:///./aqarino_v2.db
-      - LEAD_OUTPUT=excel
-
-  frontend:
-    image: nginx:alpine
-    container_name: aqarino-frontend
-    ports:
-      - "8081:80"
     volumes:
-      - ./backend/app/static/host:/usr/share/nginx/html:ro
+      - ./backend:/app/backend
